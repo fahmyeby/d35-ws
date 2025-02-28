@@ -1,0 +1,41 @@
+<div class="container">
+    <h1>Weather App</h1>
+    
+    <div class="input-container">
+      <form [formGroup]="cityForm" (ngSubmit)="addCity()">
+        <div class="form-row">
+          <label for="cityName">City:</label>
+          <div class="input-with-button">
+            <input 
+              type="text" 
+              id="cityName" 
+              formControlName="cityName" 
+              placeholder="Enter city name"
+            >
+            <button 
+              type="submit" 
+              [disabled]="cityForm.invalid">
+              Add
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+    <div class="city-list">
+      <div 
+        *ngFor="let city of cities" 
+        class="city-item" 
+        (click)="viewCityWeather(city)">
+        <span>{{ city }}</span>
+        <button 
+          class="delete-btn" 
+          (click)="deleteCity(city, $event)">
+          ×
+        </button>
+      </div>
+      <div *ngIf="cities.length === 0" class="empty-message">
+        No cities added. Add a city to see weather information.
+      </div>
+    </div>
+  </div>
